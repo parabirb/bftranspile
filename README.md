@@ -1,5 +1,5 @@
 # bftranspile
-a transpiler from BF to JS (both browser and Node are supported).
+a transpiler from BF to JS (both browser and Node are supported). bftranspile can show notable improvements over interpreters written in JS (the longer your program runs, the more improvement you see). `speedtest.js` demonstrates this.
 
 ## todo
 optimization. things like `>>>>` convert to `ptr++;ptr++;ptr++;ptr++` instead of `ptr+=4`.
@@ -31,4 +31,15 @@ const program = transpiler("Your code",
     code is running in, you can omit them.
 */
 ```
-note that you can use the transpiler in the browser too! it sets `window.bftranspiler`.
+note that you can use the transpiler in the browser too! it sets `window.bftranspiler`. an example is located at `demo.html`, which contains a fully functional brainfuck transpiler in the browser.
+
+# for brainfuck programmers
+### this section is dedicated to people writing brainfuck for bftranspile.
+## environment
+bftranspile allocates each program 1 mebibyte of memory (or 1048576 bytes). data is stored as a signed integer (two's complement). the pointer begins at 0.
+## overflows
+attempts to move the pointer below 0 or above 1048575 will result in the following behavior:
+* attempts to write to data at that pointer will fail
+* `[]` loops will not work (code in that loop will be skipped)
+
+attempts to move the data at the pointer above 127 or below -128 will result in an integer overflow.

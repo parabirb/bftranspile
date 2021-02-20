@@ -1,7 +1,18 @@
 const { performance } = require("perf_hooks");
 const { transpiler } = require("./libtrans");
 const turingext = require("./bflib");
-const prog = `++++++++[>++++[>++>+++>+++>+<<<<-]>+>+>->>+[<]<-]>>.>---.+++++++..+++.>>.<-.<.+++.------.--------.>>+.>++.`;
+const prog = `[sierpinski.b -- display Sierpinski triangle
+(c) 2016 Daniel B. Cristofani
+http://brainfuck.org/]
+
+++++++++[>+>++++<<-]>++>>+<[-[>>+<<-]+>>]>+[
+    -<<<[
+        ->[+[-]+>++>>>-<<]<[<]>>++++++[<<+++++>>-]+<<++.[-]<<
+    ]>.>+[>>]>+
+]
+
+[Shows an ASCII representation of the Sierpinski triangle
+(iteration 5).]`;
 const stds = `let o=(c)=>process.stdout.write(String.fromCharCode(c));`;
 const stdout = (c)=>process.stdout.write(c);
 
