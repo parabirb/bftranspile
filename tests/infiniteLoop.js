@@ -1,0 +1,1 @@
+const {performance}=require('perf_hooks');let s=performance.now();let m=new Int8Array(1048576);let p=0;m[p]++;while(m[p]){}console.log('\nFinished in '+Math.floor((performance.now()-s)*100)/100+'ms. (Transpiled w/ perf by bftranspile)');

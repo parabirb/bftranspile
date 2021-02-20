@@ -1,0 +1,14 @@
+{
+  "name": "bftranspile",
+  "version": "1.0.0",
+  "description": "a transpiler from BF to JS written in JS.",
+  "main": "index.js",
+  "scripts": {
+    "test": "node ."
+  },
+  "author": "parabirb",
+  "license": "0BSD",
+  "dependencies": {
+    "readline-sync": "^1.4.10"
+  }
+}
