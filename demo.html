@@ -1,7 +1,14 @@
 <!DOCTYPE HTML>
 <html>
     <!-- we cock. dick. BALLING. -->
-    <!-- this is a barebones demo, not for actual use -->
+    <!-- ~~this is a barebones demo, not for actual use~~ -->
+    <!--
+        DISREGARD THAT I SUCK COCKS.
+        This is now pretty much a fully featured implementation (other than the fact that infinite loops crash it).
+        You can actually use it.
+        It fully complies with the epistle in README.md and is ready for use.
+        If there are any problems, please create an issue.
+    -->
     <head>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
@@ -25,6 +32,15 @@
         <textarea placeholder="User input..." id="input"></textarea><br>
         <textarea placeholder="Brainfuck..." id="brainfuck"></textarea><br>
         <button onclick="run()">Run</button>
+    <p style="text-align: center">Note:<br>
+    This demo is fully compliant with <a target="_blank" href="http://brainfuck.org/epistle.html">The Epistle to the Implementors</a>.<br>
+    In order to test if the transpiler is working, you should:<br>
+    </p>
+    <ol style="text-align: center">
+        <li>Set the Brainfuck to &gt;,&gt;+++++++++,&gt;+++++++++++[&lt;++++++&lt;++++++&lt;+&gt;&gt;&gt;-]&lt;&lt;.&gt;.&lt;&lt;-.&gt;.&gt;.&lt;&lt;.</li>
+        <li>Put a newline (hit enter) in the input.</li>
+        <li>Run the program. Its output should be: <pre style="margin-left: 25vw; margin-right: 25vw">LB<br>LB</pre>.</li>
+    </ol>
     </body>
     <script src="libtrans.js">
     </script>
@@ -37,6 +53,7 @@
         let start = 0;
         let end = 0;
         let running = false;
+        let eof = false;
 
         function endMePlease(msg = "") {
             end = performance.now();
@@ -69,7 +86,13 @@
         function i() {
             inputindex++;
             if (inputbuf[inputindex]) return inputbuf.charCodeAt(inputindex);
+            else if (!eof) {
+                // comply with epistle--set value to 0.
+                eof = true;
+                return 0;
+            }
             else {
+                // if program doesn't comply with EOF, stop it.
                 endMePlease();
                 fail; // i haven't found a better way to stop the transpiled code :/
             }
@@ -77,6 +100,7 @@
 
         function run() {
             if (running) return;
+            eof = false;
             running = true;
             inputindex = -1;
             inputbuf = document.getElementById("input").value;

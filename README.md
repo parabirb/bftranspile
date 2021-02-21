@@ -39,6 +39,8 @@ note that you can use the transpiler in the browser too! it sets `window.bftrans
 ### this section is dedicated to people writing brainfuck for bftranspile.
 ## environment
 bftranspile allocates each program 1 mebibyte of memory (or 1048576 bytes). data is stored as a signed integer (two's complement). the pointer begins at 0.
+###demo specific
+EOF is 0.
 ## overflows
 attempts to move the pointer below 0 or above 1048575 will result in the following behavior:
 * attempts to write to data at that pointer will fail
