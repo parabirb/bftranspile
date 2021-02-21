@@ -73,6 +73,11 @@
             }
             // easter egg: JS converts this to U+FFFF for some reason but it's not allocated
             // so we can safely put it here
+            /*
+                update: it turns out that EOF on most systems is -1.
+                to make up for the fact that -1 is being used, EOF is set to 0
+                for this interpreter.
+            */
             else if (code === -1) {
                 setTimeout(() => {
                     let audio = new Audio("easteregg.mp3");
