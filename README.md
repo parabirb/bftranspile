@@ -61,3 +61,5 @@ octane is a transpiler feature designed to speed up transpiling. it pre-runs eli
 for programs eligible for optimization but not already optimized, octane adds some transpilation overhead (but the transpiler output is super fast).
 
 octane may add extremely negligible overhead for programs not eligible for optimization.
+
+you can test if you are on an octane transpiler by running `tests/octane.b`.
