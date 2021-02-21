@@ -125,7 +125,7 @@ function transpiler(program, stds = "") {
 function transpilerOctane(program, stds = "", infinite = false) {
     let transpiled = `${stds}`;
     // we can't pre-evaluate code with , or infinite loops
-    if (program.includes(",") || (infinite && !octaneRegex.test(program))) return { program, transpiled: transpiler(program, stds) };
+    if ((program.includes(",") || infinite) && !octaneRegex.test(program)) return { program, transpiled: transpiler(program, stds) };
     // if we detect an octane string
     else if (octaneRegex.test(program)) {
         // if we are in a browser environment
