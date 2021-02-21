@@ -62,6 +62,10 @@
             running = false;
         }
 
+        function r(string) {
+            document.getElementById("output").innerHTML += string.replace(" ", "&nbsp;").replace("\n", "<br>");
+        }
+
         function o(code) {
             // a little \a for you ;)
             if (code === 7) {
@@ -113,7 +117,7 @@
             let program = document.getElementById("brainfuck").value;
             start = performance.now();
             try {
-                eval(window.bftranspile.transpiler(program, ""));
+                eval(window.bftranspile.transpilerOctane(program, "", true).transpiled);
             }
             catch (e) {
                 if (e.toString() === "ReferenceError: fail is not defined") return;
