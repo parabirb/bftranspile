@@ -18,7 +18,7 @@ run `speedtest.js` for a speedtest compared to an interpreter i wrote.
 ## accessing the transpiler directly
 do something like:
 ```javascript
-const { transpiler } = require("./libtrans"); // or transpilerDebug
+const { transpiler } = require("./libtrans"); // do not use transpilerDebug. it is not maintained.
 const program = transpiler("Your code",
     "const i=()=>{/*todo*/};const o=(a)=>process.stdout.write(String.fromCharCode(a);");
 // program will have the transpiled program.
