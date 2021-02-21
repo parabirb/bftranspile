@@ -38,6 +38,13 @@
         let end = 0;
         let running = false;
 
+        function endMePlease(msg = "") {
+            end = performance.now();
+            if (document.getElementById("output").innerHTML.endsWith("<br>")) document.getElementById("output").innerHTML = document.getElementById("output").innerHTML.replace(/<br>$/, "");
+            document.getElementById("output").innerHTML += `<br>${msg}${msg !== "" ? "<br>" : ""}Execution finished in ${Math.floor((end - start) * 100) / 100}ms.`;
+            running = false;
+        }
+
         function o(code) {
             // a little \a for you ;)
             if (code === 7) {
@@ -63,10 +70,7 @@
             inputindex++;
             if (inputbuf[inputindex]) return inputbuf.charCodeAt(inputindex);
             else {
-                end = performance.now();
-                if (document.getElementById("output").innerHTML.endsWith("<br>")) document.getElementById("output").innerHTML = document.getElementById("output").innerHTML.replace(/<br>$/, "");
-                document.getElementById("output").innerHTML += "<br>Execution finished in " + Math.floor((end - start) * 100) / 100 + "ms.";
-                running = false;
+                endMePlease();
                 fail; // i haven't found a better way to stop the transpiled code :/
             }
         }
@@ -79,11 +83,22 @@
             document.getElementById("output").innerHTML = "Starting execution...<br>";
             let program = document.getElementById("brainfuck").value;
             start = performance.now();
-            eval(window.bftranspile.transpiler(program, ""));
-            end = performance.now();
-            if (document.getElementById("output").innerHTML.endsWith("<br>")) document.getElementById("output").innerHTML = document.getElementById("output").innerHTML.replace(/<br>$/, "");
-            document.getElementById("output").innerHTML += "<br>Execution finished in " + Math.floor((end - start) * 100) / 100 + "ms.";
-            running = false;
+            try {
+                eval(window.bftranspile.transpiler(program, ""));
+            }
+            catch (e) {
+                if (e.toString() === "ReferenceError: fail is not defined") return;
+                msg = `Failed with error:<br>${e}<br>`;
+                switch (e.toString()) {
+                    case "SyntaxError: missing } in compound statement": msg += "Hint: You likely have an unmatched [."; break;
+                    case "SyntaxError: expected expression, got '}'": msg += "Hint: You likely have an extra ]."; break;
+                    default: msg += "No hints found. (Report this to parabirb@protonmail.ch: this should not happen.)"; break;
+                }
+                endMePlease(msg);
+                // this works. why?
+                return;
+            }
+            endMePlease();
         }
 
         textareas = document.querySelectorAll("textarea");

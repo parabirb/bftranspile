@@ -1,5 +1,7 @@
 # bftranspile
-a transpiler from BF to JS (both browser and Node are supported). bftranspile can show notable improvements over interpreters written in JS (the longer your program runs, the more improvement you see). `speedtest.js` demonstrates this.
+a transpiler from BF to JS (both browser and Node are supported). bftranspile can show notable improvements over interpreters written in JS (the longer your program runs, the more improvement you see). `speedtest.js` demonstrates this. the transpiler also complies with [the epistle to the implementors](http://brainfuck.org/epistle.html).*
+
+######* when using the transpiler, it does not due to input handling. however, the transpiler library may comply with the epistle if you define stds properly. demo.html is compliant with the epistle.
 
 ## todo
 optimization. things like `>>>>` convert to `ptr++;ptr++;ptr++;ptr++` instead of `ptr+=4`.
