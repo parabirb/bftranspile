@@ -25,7 +25,7 @@ const { program, transpiled } = transpilerOctane("Your code",
     `const i=()=>{/*todo*/};const o=(a)=>process.stdout.write(String.fromCharCode(a);
     const r=(a)=>console.log(a)`, false); // note: the false at the end is for if
                                           // the code has an infinite loop.
-// taranspiled will have the transpiled program. program is the program rewritten with
+// transpiled will have the transpiled program. program is the program rewritten with
 // optimizations.
 /*
     first arg is the brainfuck program. second arg should have:
